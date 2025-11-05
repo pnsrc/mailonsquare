@@ -9,7 +9,7 @@
 
         <meta name="robots" content="noindex, nofollow">
 
-        <link rel="stylesheet" href="/admin/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/admin/assets/bootstrap/css/bootstrap.min.css">
         <style>
             body {
               overflow-y: scroll;
@@ -88,8 +88,8 @@
           filter: invert(100%) hue-rotate(180deg);
         }
       }
-        </style>
-        <link rel="stylesheet" href="/admin/assets/bootstrap/css/bootstrap-theme.min.css">
+  </style>
+  <!-- Bootstrap 5: no separate theme file -->
     </head>
     <body>
 
@@ -99,8 +99,8 @@
     <div class="navbar navbar-inverse navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
+          <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+            <span class="visually-hidden">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -110,7 +110,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="dropdown if-logged-in-admin">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Основные настройки <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">Основные настройки <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#system_status">Проверка состояния</a></li>
                 <li><a href="#tls">TLS (SSL) сертификаты</a></li>
@@ -124,7 +124,7 @@
             </li>
             <li><a href="#mail-guide" class="if-logged-in-not-admin">Почтовые инструкции</a></li>
             <li class="dropdown if-logged-in-admin">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mail &amp; Users <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">Mail &amp; Users <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#mail-guide">Инструкции</a></li>
                 <li><a href="#users">Пользователи</a></li>
@@ -226,15 +226,16 @@
                 <p> </p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OК</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OК</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Да</button>
               </div>
             </div>
           </div>
         </div>
 
-        <script src="/admin/assets/jquery.min.js"></script>
-        <script src="/admin/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/admin/assets/jquery.min.js"></script>
+  <script src="/admin/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/admin/assets/js/bootstrap3-compat.js"></script>
 
         <script>
 var global_modal_state = null;

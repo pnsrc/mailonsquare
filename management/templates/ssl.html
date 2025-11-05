@@ -101,7 +101,7 @@ function show_tls(keep_provisioning_shown) {
       $('#ssldomain').html('<option value="">(select)</option>');
       $('#ssl_domains').show();
       for (var i = 0; i < domains.length; i++) {
-  var row = $("<tr><th class='domain'><a href=''></a></th><td class='status'></td> <td class='actions'><a href='#' onclick='return ssl_install(this);' class='btn btn-xs'>Установить сертификат</a></td></tr>");
+  var row = $("<tr><th class='domain'><a href=''></a></th><td class='status'></td> <td class='actions'><a href='#' onclick='return ssl_install(this);' class='btn btn-sm'>Установить сертификат</a></td></tr>");
         tb.append(row);
         row.attr('data-domain', domains[i].domain);
         row.find('.domain a').text(domains[i].domain);
@@ -113,7 +113,7 @@ function show_tls(keep_provisioning_shown) {
         row.addClass("text-" + domains[i].status);
         row.find('.status').text(domains[i].text);
         if (domains[i].status == "success") {
-          row.find('.actions a').addClass('btn-default').text('Заменить сертификат');
+          row.find('.actions a').addClass('btn-secondary').text('Заменить сертификат');
         } else {
           row.find('.actions a').addClass('btn-primary').text('Установить сертификат');
         }
@@ -127,7 +127,7 @@ function ssl_install(elem) {
   var domain = $(elem).parents('tr').attr('data-domain');
   $('#ssldomain').val(domain);
   show_csr();
-  $('html, body').animate({ scrollTop: $('#ssl_install_header').offset().top - $('.navbar-fixed-top').height() - 20 })
+  $('html, body').animate({ scrollTop: $('#ssl_install_header').offset().top - $('.fixed-top').height() - 20 })
   return false;
 }
 

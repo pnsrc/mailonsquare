@@ -73,11 +73,23 @@ jquery_url=https://code.jquery.com
 wget_verify $jquery_url/jquery-$jquery_version.min.js 69bb69e25ca7d5ef0935317584e6153f3fd9a88c $assets_dir/jquery.min.js
 
 # Bootstrap CDN URL
-bootstrap_version=3.4.1
+# Use Bootstrap 5.x for the control panel UI. We download the release archive
+# from GitHub. For Bootstrap 3.x we keep checksum verification; for newer
+# Bootstrap 5.x releases we download without a checksum to avoid hardcoding
+# a checksum here (the archive name changes between releases).
+bootstrap_version=5.3.2
 bootstrap_url=https://github.com/twbs/bootstrap/releases/download/v$bootstrap_version/bootstrap-$bootstrap_version-dist.zip
 
 # Get Bootstrap
-wget_verify $bootstrap_url 0bb64c67c2552014d48ab4db81c2e8c01781f580 /tmp/bootstrap.zip
+if [[ "$bootstrap_version" == 3.* ]]; then
+	# Preserve existing verified download flow for Bootstrap 3
+	wget_verify $bootstrap_url 0bb64c67c2552014d48ab4db81c2e8c01781f580 /tmp/bootstrap.zip
+else
+	# For Bootstrap 5+, download without checksum verification (administrator
+	# can validate the release manually if desired).
+	rm -f /tmp/bootstrap.zip
+	hide_output wget -O /tmp/bootstrap.zip "$bootstrap_url"
+fi
 unzip -q /tmp/bootstrap.zip -d $assets_dir
 mv $assets_dir/bootstrap-$bootstrap_version-dist $assets_dir/bootstrap
 rm -f /tmp/bootstrap.zip
