@@ -1,18 +1,18 @@
 <style>
 </style>
 
-<h2>TLS (SSL) Certificates</h2>
+<h2>TLS (SSL) сертификаты</h2>
 
-<p>A TLS (formerly called SSL) certificate is a cryptographic file that proves to anyone connecting to a web address that the connection is secure between you and the owner of that address.</p>
+<p>TLS (ранее SSL) — это криптографический сертификат, который подтверждает, что соединение между посетителем и владельцем сайта защищено.</p>
 
-<p>You need a TLS certificate for this box&rsquo;s hostname ({{hostname}}) and every other domain name and subdomain that this box is hosting a website for (see the list below).</p>
+<p>Вам нужен TLS‑сертификат для имени этого сервера ({{hostname}}) и для каждого домена и поддомена, для которых этот сервер обслуживает веб‑сайт (см. список ниже).</p>
 
 <div id="ssl_provision">
-<h3>Provision certificates</h3>
+<h3>Получение сертификатов</h3>
 
 <div id="ssl_provision_p" style="display: none; margin-top: 1.5em">
-  <button onclick='return provision_tls_cert();' class='btn btn-primary' style="float: left; margin: 0 1.5em 1em 0;">Provision</button>
-  <p>A TLS certificate can be automatically provisioned from <a href="https://letsencrypt.org/" target="_blank">Let&rsquo;s Encrypt</a>, a free TLS certificate provider, for:<br>
+  <button onclick='return provision_tls_cert();' class='btn btn-primary' style="float: left; margin: 0 1.5em 1em 0;">Получить сертификат</button>
+  <p>TLS‑сертификат можно автоматически получить у <a href="https://letsencrypt.org/" target="_blank">Let&rsquo;s Encrypt</a> (бесплатный поставщик) для:<br>
   <span class="text-primary"></span></p>
 </div>
 
@@ -21,16 +21,16 @@
 <div id="ssl_provision_result"></div>
 </div>
 
-<h3>Certificate status</h3>
+<h3>Статус сертификатов</h3>
 
-<p style="margin-top: 1.5em">Certificates expire after a period of time. All certificates will be automatically renewed through <a href="https://letsencrypt.org/" target="_blank">Let&rsquo;s Encrypt</a> 14 days prior to expiration.</p>
+<p style="margin-top: 1.5em">Сертификаты действительны ограниченный период. Все сертификаты автоматически обновляются через <a href="https://letsencrypt.org/" target="_blank">Let&rsquo;s Encrypt</a> за 14 дней до истечения срока.</p>
 
 <table id="ssl_domains" class="table" style="margin-bottom: 2em; width: auto; display: none">
   <thead>
     <tr>
-      <th>Domain</th>
-      <th>Certificate Status</th>
-      <th>Actions</th>
+  <th>Домен</th>
+  <th>Статус сертификата</th>
+  <th>Действия</th>
     </tr>
   </thead>
   <tbody>
@@ -38,43 +38,43 @@
 </table>
 
 
-<h3 id="ssl_install_header">Install certificate</h3>
+<h3 id="ssl_install_header">Установка сертификата</h3>
 
-<p>If you don't want to use our automatic Let's Encrypt integration, you can give any other certificate provider a try. You can generate the needed CSR below.</p>
+<p>Если вы не хотите пользоваться автоматической интеграцией с Let's Encrypt, вы можете получить сертификат у любого другого поставщика. Ниже можно сгенерировать CSR (запрос на подпись сертификата).</p>
 
-<p>Which domain are you getting a certificate for?</p>
+<p>Для какого домена вы запрашиваете сертификат?</p>
 
 <p><select id="ssldomain" onchange="show_csr()" class="form-control" style="width: auto"></select></p>
 
-<p>(A multi-domain or wildcard certificate will be automatically applied to any domains it is valid for besides the one you choose above.)</p>
+<p>(Мультидоменный или wildcard‑сертификат будет автоматически применён ко всем доменам, для которых он действителен, помимо выбранного выше.)</p>
 
-<p>What country are you in? This is required by some TLS certificate providers. You may leave this blank if you know your TLS certificate provider doesn't require it.</p>
+<p>В какой вы стране? Некоторые поставщики сертификатов требуют эту информацию. Оставьте поле пустым, если ваш поставщик не требует её.</p>
 
 <p><select id="sslcc" onchange="show_csr()" class="form-control" style="width: auto">
-	<option value="">(Select)</option>
-	{% for code, name in csr_country_codes %}
-		<option value="{{code}}">{{name}}</option>
-	{% endfor %}
+  <option value="">(Выбрать)</option>
+  {% for code, name in csr_country_codes %}
+    <option value="{{code}}">{{name}}</option>
+  {% endfor %}
 </select></p>
 
 <div id="csr_info" style="display: none">
-  <p>You will need to provide the certificate provider this Certificate Signing Request (CSR):</p>
+  <p>Предоставьте поставщику следующий CSR (Certificate Signing Request):</p>
 
   <pre id="ssl_csr"></pre>
 
-  <p><small>The CSR is safe to share. It can only be used in combination with a secret key stored on this machine.</small></p>
+  <p><small>CSR можно безопасно передавать — он используется вместе с приватным ключом, хранящимся на этой машине.</small></p>
 
-  <p>The certificate provider will then provide you with a TLS/SSL certificate. They may also provide you with an intermediate chain. Paste each separately into the boxes below:</p>
+  <p>Поставщик выдаст вам TLS/SSL сертификат. Также он может предоставить промежуточную цепочку сертификатов. Вставьте их по отдельности в поля ниже:</p>
 
-  <p style="margin-bottom: .5em">TLS/SSL certificate:</p>
+  <p style="margin-bottom: .5em">TLS/SSL сертификат:</p>
   <p><textarea id="ssl_paste_cert" class="form-control" style="max-width: 40em; height: 8em" placeholder="-----BEGIN CERTIFICATE-----&#xA;stuff here&#xA;-----END CERTIFICATE-----"></textarea></p>
 
-  <p style="margin-bottom: .5em">TLS/SSL intermediate chain (if provided):</p>
+  <p style="margin-bottom: .5em">Промежуточная цепочка TLS/SSL (если предоставлена):</p>
   <p><textarea id="ssl_paste_chain" class="form-control" style="max-width: 40em; height: 8em" placeholder="-----BEGIN CERTIFICATE-----&#xA;stuff here&#xA;-----END CERTIFICATE-----&#xA;-----BEGIN CERTIFICATE-----&#xA;more stuff here&#xA;-----END CERTIFICATE-----"></textarea></p>
 
-  <p>After you paste in the information, click the install button.</p>
+  <p>После вставки информации нажмите кнопку установки.</p>
 
-  <button class="btn-primary" onclick="install_cert()">Install</button>
+  <button class="btn-primary" onclick="install_cert()">Установить</button>
 </div>
 
 <script>
@@ -101,7 +101,7 @@ function show_tls(keep_provisioning_shown) {
       $('#ssldomain').html('<option value="">(select)</option>');
       $('#ssl_domains').show();
       for (var i = 0; i < domains.length; i++) {
-        var row = $("<tr><th class='domain'><a href=''></a></th><td class='status'></td> <td class='actions'><a href='#' onclick='return ssl_install(this);' class='btn btn-xs'>Install Certificate</a></td></tr>");
+  var row = $("<tr><th class='domain'><a href=''></a></th><td class='status'></td> <td class='actions'><a href='#' onclick='return ssl_install(this);' class='btn btn-xs'>Установить сертификат</a></td></tr>");
         tb.append(row);
         row.attr('data-domain', domains[i].domain);
         row.find('.domain a').text(domains[i].domain);
@@ -113,9 +113,9 @@ function show_tls(keep_provisioning_shown) {
         row.addClass("text-" + domains[i].status);
         row.find('.status').text(domains[i].text);
         if (domains[i].status == "success") {
-          row.find('.actions a').addClass('btn-default').text('Replace Certificate');
+          row.find('.actions a').addClass('btn-default').text('Заменить сертификат');
         } else {
-          row.find('.actions a').addClass('btn-primary').text('Install Certificate');
+          row.find('.actions a').addClass('btn-primary').text('Установить сертификат');
         }
 
         $('#ssldomain').append($('<option>').text(domains[i].domain));
@@ -138,7 +138,7 @@ function show_csr() {
 
  // Scroll to it and fetch.
  $('#csr_info').slideDown();
- $('#ssl_csr').text('Loading...');
+  $('#ssl_csr').text('Загрузка...');
  api(
     "/ssl/csr/" + $('#ssldomain').val(),
     "POST",
@@ -162,9 +162,9 @@ function install_cert() {
     function(status) {
       if (/^OK($|\n)/.test(status)) {
         console.log(status)
-        show_modal_error("TLS Certificate Installation", "Certificate has been installed. Check that you have no connection problems to the domain.", function() { show_ssl(); $('#csr_info').slideUp(); });
+        show_modal_error("Установка TLS‑сертификата", "Сертификат установлен. Проверьте доступность домена без ошибок соединения.", function() { show_ssl(); $('#csr_info').slideUp(); });
       } else {
-        show_modal_error("TLS Certificate Installation", status);
+        show_modal_error("Установка TLS‑сертификата", status);
       }
     });
 }
@@ -183,7 +183,7 @@ function provision_tls_cert() {
 
       // Nothing was done. There might also be problem domains, but we've already displayed those.
       if (status.requests.length == 0) {
-        show_modal_error("TLS Certificate Provisioning", "There were no domain names to provision certificates for.");
+        show_modal_error("Получение TLS‑сертификатов", "Нет доменных имён, для которых можно получить сертификаты.");
         // don't return - haven't re-enabled the provision button
       }
 
@@ -217,13 +217,13 @@ function provision_tls_cert() {
           n.find("p").addClass("text-danger").text(r.message);
 
         } else if (r.result == "installed") {
-          n.find("p").addClass("text-success").text("The TLS certificate was provisioned and installed.");
+          n.find("p").addClass("text-success").text("TLS‑сертификат был получен и установлен.");
           setTimeout("show_tls(true)", 1); // update main table of certificate statuses, call with arg keep_provisioning_shown true so that we don't clear what we just outputted
 
         }
 
         // display the detailed log info in case of problems
-        var trace = $("<div class='small text-muted' style='margin-top: 1.5em'>Log:</div>");
+  var trace = $("<div class='small text-muted' style='margin-top: 1.5em'>Журнал:</div>");
         n.append(trace);
         for (var j = 0; j < r.log.length; j++)
           trace.append($("<div/>").text(r.log[j]));

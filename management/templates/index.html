@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{hostname}} - Mail-in-a-Box Control Panel</title>
+        <title>{{hostname}} - Управление почтовым сервером</title>
 
         <meta name="robots" content="noindex, nofollow">
 
@@ -110,35 +110,35 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="dropdown if-logged-in-admin">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Основные настройки <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#system_status">Status Checks</a></li>
-                <li><a href="#tls">TLS (SSL) Certificates</a></li>
-                <li><a href="#system_backup">Backup Status</a></li>
+                <li><a href="#system_status">Проверка состояния</a></li>
+                <li><a href="#tls">TLS (SSL) сертификаты</a></li>
+                <li><a href="#system_backup">Статус резервного копирования</a></li>
                 <li class="divider"></li>
-                <li class="dropdown-header">Advanced Pages</li>
-                <li><a href="#custom_dns">Custom DNS</a></li>
-                <li><a href="#external_dns">External DNS</a></li>
-                <li><a href="#munin">Munin Monitoring</a></li>
+                <li class="dropdown-header">Прочее</li>
+                <li><a href="#custom_dns">Пользовательские DNS</a></li>
+                <li><a href="#external_dns">Внешние DNS</a></li>
+                <li><a href="#munin">Мониторинг Munin</a></li>
               </ul>
             </li>
-            <li><a href="#mail-guide" class="if-logged-in-not-admin">Mail</a></li>
+            <li><a href="#mail-guide" class="if-logged-in-not-admin">Почтовые инструкции</a></li>
             <li class="dropdown if-logged-in-admin">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mail &amp; Users <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#mail-guide">Instructions</a></li>
-                <li><a href="#users">Users</a></li>
-                <li><a href="#aliases">Aliases</a></li>
+                <li><a href="#mail-guide">Инструкции</a></li>
+                <li><a href="#users">Пользователи</a></li>
+                <li><a href="#aliases">Псевдонимы</a></li>
                 <li class="divider"></li>
-                <li class="dropdown-header">Your Account</li>
-                <li><a href="#mfa">Two-Factor Authentication</a></li>
+                <li class="dropdown-header">Ваш аккаунт</li>
+                <li><a href="#mfa">Двухфакторная аутентификация</a></li>
               </ul>
             </li>
-            <li><a href="#sync_guide" class="if-logged-in">Contacts/Calendar</a></li>
+            <li><a href="#sync_guide" class="if-logged-in">Контакты/Календарь</a></li>
             <li><a href="#web" class="if-logged-in-admin">Web</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="if-logged-in"><a href="#" onclick="do_logout(); return false;" style="color: white">Log out</a></li>
+            <li class="if-logged-in"><a href="#" onclick="do_logout(); return false;" style="color: white">Выйти</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
@@ -204,14 +204,14 @@
       <hr>
 
       <footer>
-        <p>This is a <a href="https://mailinabox.email">Mail-in-a-Box</a>.</p>
+        <p>Это <a href="https://mailinabox.email">Mail-in-a-Box</a>, система управления почтой</p>
       </footer>
     </div> <!-- /container -->
 
         <div id="ajax_loading_indicator" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 100000; text-align: center; background-color: rgba(255,255,255,.75)">
           <div style="margin: 20% auto">
             <div><span class="fa fa-spinner fa-pulse"></span></div>
-            <div>Loading...</div>
+            <div>Загрузка...</div>
           </div>
         </div>
 
@@ -226,8 +226,8 @@
                 <p> </p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">OК</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Да</button>
               </div>
             </div>
           </div>

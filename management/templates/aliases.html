@@ -3,100 +3,100 @@
 #alias_table .alias-auto .actions > * { display: none }
 </style>
 
-<h2>Aliases</h2>
+<h2>Псевдонимы</h2>
 
-<h3>Add a mail alias</h3>
+<h3>Добавить почтовый алиас</h3>
 
-<p>Aliases are email forwarders. An alias can forward email to a <a href="#users">mail user</a> or to any email address.</p>
+<p>Алиасы — это перенаправители электронной почты. Алиас может пересылать письма на <a href="#users">почтового пользователя</a> или на любой адрес электронной почты.</p>
 
-<p>To use an alias or any address besides your own login username in outbound mail, the sending user must be included as a permitted sender for the alias.</p>
+<p>Чтобы использовать алиас или любой адрес, отличный от имени вашей учётной записи при отправке исходящей почты, отправитель должен быть включён в список разрешённых отправителей для этого алиаса.</p>
 
 <form id="addalias-form" class="form-horizontal" role="form" onsubmit="do_add_alias(); return false;">
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
       <div id="alias_type_buttons" class="btn-group btn-group-xs">
-        <button type="button" class="btn btn-default" data-mode="regular">Regular</button>
-        <button type="button" class="btn btn-default" data-mode="catchall">Catch-All</button>
-        <button type="button" class="btn btn-default" data-mode="domainalias">Domain Alias</button>
+        <button type="button" class="btn btn-default" data-mode="regular">Обычный</button>
+        <button type="button" class="btn btn-default" data-mode="catchall">Перехват (catch-all)</button>
+        <button type="button" class="btn btn-default" data-mode="domainalias">Алиас домена</button>
       </div>
       <div id="alias_mode_info" class="text-info small" style="display: none; margin: .5em 0 0 0;">
-        <span class="catchall hidden">A catch-all alias captures all otherwise unmatched email to a domain.</span>
-        <span class="domainalias hidden">A domain alias forwards all otherwise unmatched email from one domain to another domain, preserving the part before the @-sign.</span>
+        <span class="catchall hidden">Catch-all алиас перехватывает все письма, не совпавшие с другими адресами домена.</span>
+        <span class="domainalias hidden">Алиас домена пересылает все непривязанные письма с одного домена на другой, сохраняя часть до символа @.</span>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="addaliasAddress" class="col-sm-1 control-label">Alias</label>
+  <label for="addaliasAddress" class="col-sm-1 control-label">Алиас</label>
     <div class="col-sm-10">
       <input type="email" class="form-control" id="addaliasAddress">
       <div style="margin-top: 3px; padding-left: 3px; font-size: 90%" class="text-muted">
-        <span class="catchall domainalias">Enter just the part of an email address starting with the @-sign.</span>
-        You may use international (non-ASCII) characters for the domain part of the email address only.
+        <span class="catchall domainalias">Введите только часть адреса, начинающуюся с символа @.</span>
+        Разрешены международные (не-ASCII) символы только в доменной части адреса.
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="addaliasForwardsTo" class="col-sm-1 control-label">Forwards To</label>
+  <label for="addaliasForwardsTo" class="col-sm-1 control-label">Пересылать на</label>
     <div class="col-sm-10">
       <textarea class="form-control" rows="3" id="addaliasForwardsTo"></textarea>
       <div style="margin-top: 3px; padding-left: 3px; font-size: 90%">
-        <span class="domainalias text-muted">Enter just the part of an email address starting with the @-sign.</span>
-        <span class="text-danger">Only forward mail to addresses handled by this Mail-in-a-Box, since mail forwarded by aliases to other domains may be rejected or filtered by the receiver. To forward mail to other domains, create a mail user and then log into webmail for the user and create a filter rule to forward mail.</span>
+        <span class="domainalias text-muted">Введите только часть адреса, начинающуюся с символа @.</span>
+        <span class="text-danger">Пересылайте почту только на адреса, обслуживаемые этим Mail-in-a-Box — пересылка алиасами на внешние домены может быть отклонена или отфильтрована приёмником. Чтобы пересылать почту на другие домены, создайте почтового пользователя и настройте пересылку через фильтр в веб‑почте для этого пользователя.</span>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="addaliasSenders" class="col-sm-1 control-label">Permitted Senders</label>
+  <label for="addaliasSenders" class="col-sm-1 control-label">Разрешённые отправители</label>
     <div class="col-sm-10">
       <div class="radio">
         <label>
           <input id="addaliasForwardsToNotAdvanced" name="addaliasForwardsToDivToggle" type="radio" checked onclick="$('#addaliasForwardsToDiv').toggle(false)">
-          Any mail user listed in the Forwards To box can send mail claiming to be from <span class="regularalias">the alias address</span><span class="catchall domainalias">any address on the alias domain</span>.
+          Любой почтовый пользователь, указанный в поле «Пересылать на», может отправлять письма, выдаваясь за <span class="regularalias">адрес алиаса</span><span class="catchall domainalias">любой адрес домена алиаса</span>.
         </label>
       </div>
       <div class="radio">
         <label>
           <input id="addaliasForwardsToAdvanced" name="addaliasForwardsToDivToggle" type="radio" id="addaliasForwardsToDivShower" onclick="$('#addaliasForwardsToDiv').toggle(true)">
-          I&rsquo;ll enter the mail users that can send mail claiming to be from <span class="regularalias">the alias address</span><span class="catchall domainalias">any address on the alias domain</span>.
+          Я укажу почтовых пользователей, которые могут отправлять письма, выдаваясь за <span class="regularalias">адрес алиаса</span><span class="catchall domainalias">любой адрес домена алиаса</span>.
         </label>
       </div>
       <div id="addaliasForwardsToDiv" style="margin-top: .5em; margin-left: 1.4em; display: none;">
-        <textarea class="form-control" rows="3" id="addaliasSenders" placeholder="one user per line or separated by commas"></textarea>
+  <textarea class="form-control" rows="3" id="addaliasSenders" placeholder="один пользователь в строке или через запятую"></textarea>
       </div>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
-      <button id="add-alias-button" type="submit" class="btn btn-primary">Add Alias</button>
-      <button id="alias-cancel" class="btn btn-default hidden" onclick="aliases_reset_form(); return false;">Cancel</button>
+  <button id="add-alias-button" type="submit" class="btn btn-primary">Добавить алиас</button>
+  <button id="alias-cancel" class="btn btn-default hidden" onclick="aliases_reset_form(); return false;">Отмена</button>
     </div>
   </div>
 </form>
 
-<h3>Existing mail aliases</h3>
+<h3>Существующие почтовые алиасы</h3>
 <table id="alias_table" class="table" style="width: auto">
   <thead>
     <tr>
       <th></th>
-      <th>Alias<br></th>
-      <th>Forwards To</th>
-      <th>Permitted Senders</th>
+      <th>Алиас<br></th>
+      <th>Пересылать на</th>
+      <th>Разрешённые отправители</th>
     </tr>
   </thead>
   <tbody>
   </tbody>
 </table>
 
-<p style="margin-top: 1.5em"><small>hostmaster@, postmaster@, admin@ and abuse@ email addresses are required on some domains.</small></p>
+<p style="margin-top: 1.5em"><small>Адреса hostmaster@, postmaster@, admin@ и abuse@ требуются на некоторых доменах.</small></p>
 
-<div style="display: none">
+  <div style="display: none">
   <table>
   <tr id="alias-template">
     <td class='actions'>
-        <a href="#" onclick="aliases_edit(this); scroll_top(); return false;" class='edit' title="Edit Alias">
+        <a href="#" onclick="aliases_edit(this); scroll_top(); return false;" class='edit' title="Редактировать алиас">
           <span class="glyphicon glyphicon-pencil"></span>
         </a>
-        <a href="#" onclick="aliases_remove(this); return false;" class='remove' title="Remove Alias">
+        <a href="#" onclick="aliases_remove(this); return false;" class='remove' title="Удалить алиас">
           <span class="glyphicon glyphicon-trash"></span>
         </a>
     </td>
@@ -107,45 +107,45 @@
   </table>
 </div>
 
-<h3>Mail aliases API (advanced)</h3>
+<h3>API почтовых алиасов (для продвинутых)</h3>
 
-<p>Use your box&rsquo;s mail aliases API to add and remove mail aliases from the command-line or custom services you build.</p>
+<p>Используйте API почтовых алиасов вашего сервера для добавления и удаления алиасов из командной строки или собственных сервисов.</p>
 
-<p>Usage:</p>
+<p>Использование:</p>
 
 <pre>curl -X <b>VERB</b> [-d "<b>parameters</b>"] --user {email}:{password} https://{{hostname}}/admin/mail/aliases[<b>action</b>]</pre>
 
-<p>Brackets denote an optional argument. Please note that the POST body <code>parameters</code> must be URL-encoded.</p>
+<p>Квадратные скобки обозначают необязательный аргумент. Обратите внимание, что тело POST-запроса <code>parameters</code> должно быть URL-кодировано.</p>
 
-<p>The email and password given to the <code>--user</code> option must be an administrative user on this system.</p>
+<p>Адрес электронной почты и пароль, переданные в опции <code>--user</code>, должны принадлежать административному пользователю на этой системе.</p>
 
-<h4 style="margin-bottom: 0">Verbs</h4>
+<h4 style="margin-bottom: 0">HTTP-методы</h4>
 
 <table class="table" style="margin-top: .5em">
-<thead><th>Verb</th> <th>Action</th><th></th></thead>
-<tr><td>GET</td><td><i>(none)</i></td> <td>Returns a list of existing mail aliases. Adding <code>?format=json</code> to the URL will give JSON-encoded results.</td></tr>
-<tr><td>POST</td><td>/add</td> <td>Adds a new mail alias. Required POST-body parameters are <code>address</code> and <code>forwards_to</code>.</td></tr>
-<tr><td>POST</td><td>/remove</td> <td>Removes a mail alias. Required POST-body parameter is <code>address</code>.</td></tr>
+<thead><th>Метод</th> <th>Действие</th><th></th></thead>
+<tr><td>GET</td><td><i>(нет)</i></td> <td>Возвращает список существующих почтовых алиасов. Добавление <code>?format=json</code> к URL вернёт результат в формате JSON.</td></tr>
+<tr><td>POST</td><td>/add</td> <td>Добавляет новый почтовый алиас. Обязательные параметры в теле POST: <code>address</code> и <code>forwards_to</code>.</td></tr>
+<tr><td>POST</td><td>/remove</td> <td>Удаляет почтовый алиас. Обязательный параметр в теле POST: <code>address</code>.</td></tr>
 </table>
 
-<h4>Examples:</h4>
+<h4>Примеры:</h4>
 
-<p>Try these examples. For simplicity the examples omit the <code>--user me@mydomain.com:yourpassword</code> command line argument which you must fill in with your email address and password.</p>
+<p>Попробуйте эти примеры. Для простоты примеры опускают аргумент командной строки <code>--user me@mydomain.com:yourpassword</code>, который вы должны заменить на ваш адрес электронной почты и пароль.</p>
 
-<pre># Gives a JSON-encoded list of all mail aliases
+<pre># Возвращает список всех почтовых алиасов в формате JSON
 curl -X GET https://{{hostname}}/admin/mail/aliases?format=json
 
-# Adds a new alias
+# Добавляет новый алиас
 curl -X POST -d "address=new_alias@mydomail.com" -d "forwards_to=my_email@mydomain.com" https://{{hostname}}/admin/mail/aliases/add
 
-# Removes an alias
+# Удаляет алиас
 curl -X POST -d "address=new_alias@mydomail.com" https://{{hostname}}/admin/mail/aliases/remove
 </pre>
 
 
 <script>
 function show_aliases() {
-  $('#alias_table tbody').html("<tr><td colspan='2' class='text-muted'>Loading...</td></tr>")
+  $('#alias_table tbody').html("<tr><td colspan='2' class='text-muted'>Загрузка...</td></tr>")
   api(
     "/mail/aliases",
     "GET",
@@ -180,22 +180,22 @@ function show_aliases() {
       $('#alias_type_buttons button').removeClass('active');
       $(this).addClass('active');
       $('#addalias-form .regularalias, #addalias-form .catchall, #addalias-form .domainalias').addClass('hidden');
-      if ($(this).attr('data-mode') == "regular") {
+        if ($(this).attr('data-mode') == "regular") {
         $('#addaliasAddress').attr('type', 'email');
-        $('#addaliasAddress').attr('placeholder', 'you@yourdomain.com (incoming email address)');
-        $('#addaliasForwardsTo').attr('placeholder', 'one address per line or separated by commas');
+        $('#addaliasAddress').attr('placeholder', 'you@yourdomain.com (входящий адрес электронной почты)');
+        $('#addaliasForwardsTo').attr('placeholder', 'один адрес в строке или через запятую');
         $('#alias_mode_info').slideUp();
         $('#addalias-form .regularalias').removeClass('hidden');
       } else if ($(this).attr('data-mode') == "catchall") {
         $('#addaliasAddress').attr('type', 'text');
-        $('#addaliasAddress').attr('placeholder', '@yourdomain.com (incoming catch-all domain)');
-        $('#addaliasForwardsTo').attr('placeholder', 'one address per line or separated by commas');
+        $('#addaliasAddress').attr('placeholder', '@yourdomain.com (перехватывает все непривязанные адреса домена)');
+        $('#addaliasForwardsTo').attr('placeholder', 'один адрес в строке или через запятую');
         $('#alias_mode_info').slideDown();
         $('#addalias-form .catchall').removeClass('hidden');
       } else if ($(this).attr('data-mode') == "domainalias") {
         $('#addaliasAddress').attr('type', 'text');
-        $('#addaliasAddress').attr('placeholder', '@yourdomain.com (incoming catch-all domain)');
-        $('#addaliasForwardsTo').attr('placeholder', '@otherdomain.com (forward to other domain)');
+        $('#addaliasAddress').attr('placeholder', '@yourdomain.com (перехватывает все непривязанные адреса домена)');
+        $('#addaliasForwardsTo').attr('placeholder', '@otherdomain.com (пересылать на другой домен)');
         $('#alias_mode_info').slideDown();
         $('#addalias-form .domainalias').removeClass('hidden');
       }
@@ -206,12 +206,12 @@ function show_aliases() {
 
 var is_alias_add_update = false;
 function do_add_alias() {
-  var title = (!is_alias_add_update) ? "Add Alias" : "Update Alias";
+  var title = (!is_alias_add_update) ? "Добавить алиас" : "Обновить алиас";
   var form_address = $("#addaliasAddress").val();
   var form_forwardsto = $("#addaliasForwardsTo").val();
   var form_senders = ($('#addaliasForwardsToAdvanced').prop('checked') ? $("#addaliasSenders").val() : '');
-  if ($('#addaliasForwardsToAdvanced').prop('checked') && !/\S/.exec($("#addaliasSenders").val())) {
-    show_modal_error(title, "You did not enter any permitted senders.");
+    if ($('#addaliasForwardsToAdvanced').prop('checked') && !/\S/.exec($("#addaliasSenders").val())) {
+    show_modal_error(title, "Вы не указали ни одного разрешённого отправителя.");
     return false;
   }
   api(
@@ -241,7 +241,7 @@ function aliases_reset_form() {
   $("#addaliasForwardsTo").val('')
   $("#addaliasSenders").val('')
   $('#alias-cancel').addClass('hidden');
-  $('#add-alias-button').text('Add Alias');
+  $('#add-alias-button').text('Добавить алиас');
   is_alias_add_update = false;
 }
 
@@ -268,7 +268,7 @@ function aliases_edit(elem) {
   $('#addaliasForwardsToAdvanced').prop('checked', senders != "");
   $('#addaliasForwardsToNotAdvanced').prop('checked', senders == "");
   $("#addaliasSenders").val(senders);
-  $('#add-alias-button').text('Update');
+  $('#add-alias-button').text('Обновить');
   $('body').animate({ scrollTop: 0 })
   is_alias_add_update = true;
 }
@@ -276,9 +276,9 @@ function aliases_edit(elem) {
 function aliases_remove(elem) {
   var row_address = $(elem).parents('tr').attr('data-address');
   show_modal_confirm(
-    "Remove Alias",
-    "Remove " + row_address + "?",
-    "Remove",
+    "Удалить алиас",
+    "Удалить " + row_address + "?",
+    "Удалить",
     function() {
       api(
         "/mail/aliases/remove",
@@ -288,7 +288,7 @@ function aliases_remove(elem) {
         },
         function(r) {
           // Responses are multiple lines of pre-formatted text.
-          show_modal_error("Remove Alias", $("<pre/>").text(r));
+          show_modal_error("Удалить алиас", $("<pre/>").text(r));
           show_aliases();
         });
     });

@@ -26,35 +26,35 @@
 }
 </style>
 
-<h2>External DNS</h2>
+<h2>Настройки внешнего DNS</h2>
 
-<p class="text-warning">This is an advanced configuration page.</p>
+<p class="text-warning">Это страница расширенной конфигурации.</p>
 
-<p>Although your box is configured to serve its own DNS, it is possible to host your DNS elsewhere &mdash; such as in the DNS control panel provided by your domain name registrar or virtual cloud provider &mdash; by copying the DNS zone information shown in the table below into your external DNS server&rsquo;s control panel.</p>
+<p>Хотя ваш сервер настроен на обслуживание собственного DNS, вы можете разместить свой DNS в другом месте &mdash; например, в панели управления DNS, предоставленной вашим регистратором доменных имен или виртуальным облачным провайдером &mdash; скопировав информацию о зоне DNS, показанную в таблице ниже, в панель управления вашего внешнего DNS-сервера.</p>
 
-<p>If you do so, you are responsible for keeping your DNS entries up to date! If you previously enabled DNSSEC on your domain name by setting a DS record at your registrar, you will likely have to turn it off before changing nameservers.</p>
+<p>Если вы это сделаете, вы несете ответственность за поддержание актуальности ваших DNS-записей! Если вы ранее включили DNSSEC для вашего доменного имени, установив запись DS у вашего регистратора, вам, вероятно, придется отключить его перед изменением серверов имен.</p>
 
 
 <p class="alert" role="alert">
-	<span class="glyphicon glyphicon-info-sign"></span>
-	You may encounter zone file errors when attempting to create a TXT record with a long string.
-	<a href="https://tools.ietf.org/html/rfc4408#section-3.1.3">RFC 4408</a> states a TXT record is allowed to contain multiple strings, and this technique can be used to construct records that would exceed the 255-byte maximum length.
-	You may need to adopt this technique when adding DomainKeys. Use a tool like <code>named-checkzone</code> to validate your zone file.
+  <span class="glyphicon glyphicon-info-sign"></span>
+  Вы можете столкнуться с ошибками файла зоны при попытке создать запись TXT с длинной строкой.
+  <a href="https://tools.ietf.org/html/rfc4408#section-3.1.3">RFC 4408</a> указывает, что запись TXT может содержать несколько строк, и этот приём можно использовать для составления записей, которые в сумме превысят максимальную длину в 255 байт.
+  Возможно, вам потребуется применить этот приём при добавлении DomainKeys. Используйте утилиту, например <code>named-checkzone</code>, чтобы проверить корректность вашего файла зоны.
 </p>
 
-<h3>Download zonefile</h3>
-<p>You can download your zonefiles here or use the table of records below.</p>
+<h3>Скачать zonefile</h3>
+<p>Вы можете скачать свои zonefile здесь или использовать таблицу записей ниже.</p>
 <form class="form-inline" role="form" onsubmit="do_download_zonefile(); return false;">
     <div class="form-group">
         <div class="form-group">
             <label for="downloadZonefile" class="control-label sr-only">Zone</label>
             <select id="downloadZonefile" class="form-control" style="width: auto"> </select>
         </div>
-        <button type="submit" class="btn btn-primary">Download</button>
+        <button type="submit" class="btn btn-primary">Скачать</button>
     </div>
 </form>
 
-<h3>Records</h3>
+<h3>Записи</h3>
 
 <table id="external_dns_settings" class="table">
 	<thead>

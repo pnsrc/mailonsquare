@@ -1,30 +1,30 @@
 <style>
 </style>
 
-<h2>Static Web Hosting</h2>
+<h2>Статическая веб-хостинг</h2>
 
-<p>This machine is serving a simple, static website at <a href="https://{{hostname}}">https://{{hostname}}</a> and at all domain names that you set up an email user or alias for.</p>
+<p>Этот сервер обслуживает простой статический веб-сайт по адресу <a href="https://{{hostname}}">https://{{hostname}}</a> и по всем доменным именам, для которых вы настроили почтового пользователя или псевдоним.</p>
 
-<h3>Uploading web files</h3>
+<h3>Загрузка веб-файлов</h3>
 
-<p>You can replace the default website with your own HTML pages and other static files. This control panel won&rsquo;t help you design a website, but once you have <tt>.html</tt> files you can upload them following these instructions:</p>
+<p>Вы можете заменить веб-сайт по умолчанию на свои собственные HTML-страницы и другие статические файлы. Эта панель управления не поможет вам разработать веб-сайт, но как только у вас есть файлы <tt>.html</tt>, вы можете загрузить их, следуя этим инструкциям:</p>
 
 <ol>
-<li>Ensure that any domains you are publishing a website for have no problems on the <a href="#system_status">Status Checks</a> page.</li>
+<li>Убедитесь, что у любых доменов, для которых вы публикуете веб-сайт, нет проблем на странице <a href="#system_status">Проверка состояния</a>.</li>
 
-<li>On your personal computer, install an SSH file transfer program such as <a href="https://filezilla-project.org/">FileZilla</a> or <a href="https://man.openbsd.org/scp.1">scp</a>.</li>
+<li>На вашем персональном компьютере установите программу передачи файлов по SSH, такую как <a href="https://filezilla-project.org/">FileZilla</a> или <a href="https://man.openbsd.org/scp.1">scp</a>.</li>
 
-<li>Log in to this machine with the file transfer program. The server is <strong>{{hostname}}</strong>, the protocol is SSH or SFTP, and use the <strong>SSH login credentials</strong> that you used when you originally created this machine at your cloud host provider. This is <strong>not</strong> what you use to log in either for email or this control panel. Your SSH credentials probably involves a private key file.</li>
+<li>Войдите на этот компьютер с помощью программы передачи файлов. Сервер - это <strong>{{hostname}}</strong>, протокол - SSH или SFTP, и используйте <strong>учетные данные для входа по SSH</strong>, которые вы использовали, когда изначально создавали этот компьютер у вашего облачного провайдера. Это <strong>не</strong> то, что вы используете для входа как для электронной почты, так и для этой панели управления. Ваши учетные данные SSH, вероятно, включают файл закрытого ключа.</li>
 
-<li>Upload your <tt>.html</tt> or other files to the directory <tt>{{storage_root}}/www/default</tt> on this machine. They will appear directly and immediately on the web.</li>
+<li>Загрузите <tt>.html</tt> или другие файлы в каталог <tt>{{storage_root}}/www/default</tt> на этом компьютере. Они появятся непосредственно и немедленно в Интернете.</li>
 
-<li>The websites set up on this machine are listed in the table below with where to put the files for each website.</li>
+<li>Сайты, настроенные на этом компьютере, перечислены в таблице ниже с указанием местоположения для размещения файлов для каждого сайта.</li>
 
 <table id="web_domains_existing" class="table" style="margin-bottom: 1em; width: auto;">
         <thead>
                 <tr>
-                        <th>Site</th>
-                        <th>Directory for Files</th>
+                        <th>Сайт</th>
+                        <th>Каталог для файлов</th>
 			<th/>
                 </tr>
         </thead>
@@ -32,7 +32,7 @@
         </tbody>
 </table>
 
-<p>To add a domain to this table, create a dummy <a href="#users">mail user</a> or <a href="#aliases">alias</a> on the domain first and see the <a href="https://mailinabox.email/guide.html#domain-name-configuration">setup guide</a> for adding nameserver records to the new domain at your registrar (but <i>not</i> glue records).</p>
+<p>Чтобы добавить домен в эту таблицу, сначала создайте фиктивного <a href="#users">почтового пользователя</a> или <a href="#aliases">псевдоним</a> на домене, а затем ознакомьтесь с <a href="https://mailinabox.email/guide.html#domain-name-configuration">руководством по настройке</a> для добавления записей имен серверов в новый домен у вашего регистратора (но <i>не</i> записей-склеек).</p>
 
 </ol>
 
@@ -70,10 +70,10 @@ function do_web_update() {
     },
     function(data) {
       if (data == "")
-        data = "Nothing changed.";
+        data = "Ничего не изменилось.";
       else
         data = $("<pre/>").text(data);
-      show_modal_error("Web Update", data, function() { show_web() });
+      show_modal_error("Обновление веб-сайта", data, function() { show_web() });
     });
 }
 
@@ -81,9 +81,9 @@ function show_change_web_root(elem) {
   var domain = $(elem).parents('tr').attr('data-domain');
   var root = $(elem).parents('tr').attr('data-custom-web-root');
   show_modal_confirm(
-    'Change Root Directory for ' + domain,
-    $('<p>You can change the static directory for <tt>' + domain + '</tt> to:</p> <p><tt>' + root + '</tt></p> <p>First create this directory on the server. Then click Update to scan for the directory and update web settings.</p>'),
-    'Update',
+    'Изменить корневой каталог для ' + domain,
+    $('<p>Вы можете изменить статический каталог для <tt>' + domain + '</tt> на:</p> <p><tt>' + root + '</tt></p> <p>Сначала создайте этот каталог на сервере. Затем нажмите Обновить, чтобы просканировать каталог и обновить настройки веб-сайта.</p>'),
+    'Обновить',
     function() { do_web_update(); });
 }
 </script>

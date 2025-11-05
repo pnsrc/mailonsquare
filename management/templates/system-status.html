@@ -1,4 +1,4 @@
-<h2>System Status Checks</h2>
+<h2>Статус системы</h2>
 
 <style>
 #system-checks .heading td {
@@ -40,13 +40,13 @@
 	<div class="col-md-push-9 col-md-3">
 
 <div id="system-reboot-required" style="display: none; margin-bottom: 1em;">
-	<button type="button" class="btn btn-danger" onclick="confirm_reboot(); return false;">Reboot Box</button>
-	<div>No reboot is necessary.</div>
+	<button type="button" class="btn btn-danger" onclick="confirm_reboot(); return false;">Перезагрузить систему</button>
+	<div>Перезагрузка не требуется.</div>
 </div>
 
 <div id="system-privacy-setting" style="display: none">
-	<div><a onclick="return enable_privacy(!current_privacy_setting)" href="#"><span>Enable/Disable</span> New-Version Check</a></div>
-	<p style="line-height: 125%"><small>(When enabled, status checks phone-home to check for a new release of Mail-in-a-Box.)</small></p>
+	<div><a onclick="return enable_privacy(!current_privacy_setting)" href="#"><span>Включить/Отключить</span> проверку новой версии</a></div>
+	<p style="line-height: 125%"><small>(При включении проверки состояния система будет отправлять запросы на наличие новой версии Mail-in-a-Box.)</small></p>
 </div>
 
 	</div> <!-- /col -->

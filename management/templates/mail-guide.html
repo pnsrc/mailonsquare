@@ -1,71 +1,71 @@
 <style>#panel_mail-guide table.table { width: auto; margin-left: .5em; }</style>
 
 <div>
-	<h2 style="margin-bottom: 0">Checking and Sending Mail</h2>
+	<h2 style="margin-bottom: 0">Проверка и отправка почты</h2>
 
 	<div class="row">
 		<div class="col-sm-7">
-			<h3>Webmail</h3>
+			<h3>Веб‑почта</h3>
 
-			<p>Webmail lets you check your email from any web browser. Your webmail site is:</p>
+			<p>Веб‑почта позволяет просматривать почту в любом браузере. Ваш веб‑почтовый интерфейс доступен по адресу:</p>
 			<p style="margin-left: 2em"><strong><a href="https://{{hostname}}/mail">https://{{hostname}}/mail</a></strong></p>
-			<p>Your username is your whole email address.</p>
+			<p>Имя пользователя — это ваш полный адрес электронной почты.</p>
 
 
-			<h3>Mobile/desktop apps</h3>
+			<h3>Мобильные и настольные приложения</h3>
 
-				<h4>Automatic configuration</h4>
+				<h4>Автоматическая настройка</h4>
 
-					<p>iOS and macOS only: Open <a style="font-weight: bold" href="https://{{hostname}}/mailinabox.mobileconfig">this configuration link</a> on your iOS device or on your Mac desktop to easily set up mail (IMAP/SMTP), Contacts, and Calendar. Your username is your whole email address.</p>
-	
-				<h4>Manual configuration</h4>
+					<p>Только для iOS и macOS: откройте <a style="font-weight: bold" href="https://{{hostname}}/mailinabox.mobileconfig">эту ссылку настройки</a> на устройстве iOS или на Mac, чтобы быстро настроить почту (IMAP/SMTP), контакты и календарь. Имя пользователя — ваш полный адрес электронной почты.</p>
+    
+				<h4>Ручная настройка</h4>
 
-					<p>Use the following settings when you set up your email on your phone, desktop, or other device:</p>
+					<p>Используйте следующие параметры при настройке почты на телефоне, компьютере или другом устройстве:</p>
 
 					<table class="table">
 					<thead>
-						<tr><th>Option</th> <th>Value</th></tr>
+						<tr><th>Параметр</th> <th>Значение</th></tr>
 					</thead>
-					<tr><th>Protocol/Method</th> <td>IMAP</td></tr>
-					<tr><th>Mail server</th> <td>{{hostname}}</td>
-					<tr><th>IMAP Port</th> <td>993</td></tr>
-					<tr><th>IMAP Security</th> <td>SSL or TLS</td></tr>
-					<tr><th>SMTP Port</th> <td>465</td></tr>
-					<tr><th>SMTP Security</td> <td>SSL or TLS</td></tr>
-					<tr><th>Username:</th> <td>Your whole email address.</td></tr>
-					<tr><th>Password:</th> <td>Your mail password.</td></tr>
+					<tr><th>Протокол/Метод</th> <td>IMAP</td></tr>
+					<tr><th>Почтовый сервер</th> <td>{{hostname}}</td>
+					<tr><th>Порт IMAP</th> <td>993</td></tr>
+					<tr><th>Безопасность IMAP</th> <td>SSL или TLS</td></tr>
+					<tr><th>Порт SMTP</th> <td>465</td></tr>
+					<tr><th>Безопасность SMTP</td> <td>SSL или TLS</td></tr>
+					<tr><th>Имя пользователя:</th> <td>Ваш полный адрес электронной почты.</td></tr>
+					<tr><th>Пароль:</th> <td>Ваш почтовый пароль.</td></tr>
 					</table>
 
-					<p>In addition to setting up your email, you&rsquo;ll also need to set up <a href="#sync_guide">contacts and calendar synchronization</a> separately.</p>
+					<p>Кроме настройки почты, необходимо отдельно настроить <a href="#sync_guide">синхронизацию контактов и календаря</a>.</p>
 
-					<p>As an alternative to IMAP you can also use the POP protocol: choose POP as the protocol, port 995, and SSL or TLS security in your mail client. The SMTP settings and usernames and passwords remain the same. However, we recommend you use IMAP instead.</p>
+					<p>Вместо IMAP вы также можете использовать POP: выберите протокол POP, порт 995 и безопасность SSL или TLS в вашем почтовом клиенте. Настройки SMTP и учётные данные остаются такими же. Тем не менее, мы рекомендуем использовать IMAP.</p>
 
-				<h4>Exchange/ActiveSync settings</h4>
+				<h4>Настройки Exchange/ActiveSync</h4>
 
-					<p>On iOS devices, devices on this <a href="https://github.com/Z-Hub/Z-Push/wiki/Compatibility">compatibility list</a>, or using Outlook 2007 or later on Windows 7 and later, you may set up your mail as an Exchange or ActiveSync server. However, we&rsquo;ve found this to be more buggy than using IMAP as described above. If you encounter any problems, please use the manual settings above.</p>
+					<p>На устройствах iOS, на устройствах из <a href="https://github.com/Z-Hub/Z-Push/wiki/Compatibility">списка совместимости</a> или в Outlook 2007 и новее на Windows 7 и выше вы можете настроить почту через Exchange/ActiveSync. Однако такой способ чаще даёт сбои по сравнению с использованием IMAP, описанным выше. При проблемах используйте ручные настройки.</p>
 
 					<table class="table">
-					<tr><th>Server</th> <td>{{hostname}}</td></tr>
-					<tr><th>Options</th> <td>Secure Connection</td></tr>
+					<tr><th>Сервер</th> <td>{{hostname}}</td></tr>
+					<tr><th>Параметры</th> <td>Защищённое соединение</td></tr>
 					</table>
 
-					<p>Your device should also provide a contacts list and calendar that syncs to this box when you use this method.</p>
+					<p>При таком способе у вашего устройства также должен появиться список контактов и календарь, синхронизируемые с этим сервером.</p>
 		</div>
 
 		<div class="col-sm-5">
 		<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Other information about mail on your box</h3>
+			<h3>Дополнительная информация о почте на вашем сервере</h3>
 		</div>
 		<div class="panel-body">
-			<h4>Greylisting</h4>
-			<p>Your box uses a technique called greylisting to cut down on spam. Greylisting works by initially rejecting mail from people you haven&rsquo;t received mail from before. Legitimate mail servers will attempt redelivery shortly afterwards, but the vast majority of spam gets tricked by this. If you are waiting for an email from someone new, such as if you are registering on a new website and are waiting for an email confirmation, please be aware there will be a minimum of 3 minutes delay, depending how soon the remote server attempts redelivery.</p>
+			<h4>Грейлистинг</h4>
+			<p>Сервер использует метод, называемый грейлистингом, чтобы сократить количество спама. Грейлистинг временно отклоняет почту от отправителей, от которых вы ранее не получали писем. Легитимные почтовые серверы попытаются доставить письмо повторно через короткое время, тогда как большая часть спама не проходит повторную доставку. Если вы ждёте письмо от нового отправителя (например, подтверждение регистрации на сайте), имейте в виду минимальную задержку около 3 минут — точное время зависит от того, как быстро удалённый сервер повторно попытается доставить сообщение.</p>
 
-			<h4>+tag addresses</h4>
-			<p>Every incoming email address also receives mail for <code>+tag</code> addresses. If your email address is <code>you@yourdomain.com</code>, you&rsquo;ll also automatically get mail sent to <code>you+anythinghere@yourdomain.com</code>. Use this as a fast way to segment incoming mail for your own filtering rules without having to create aliases in this control panel.</p>
+			<h4>Адреса с +tag</h4>
+			<p>Каждый входящий адрес также принимает почту для адресов с <code>+tag</code>. Если ваш адрес <code>you@yourdomain.com</code>, вы автоматически будете получать почту, отправленную на <code>you+anythinghere@yourdomain.com</code>. Это удобный способ сегментировать входящую почту с помощью фильтров без создания алиасов в этой панели управления.</p>
 
-			<h4>Use only this box to send as you</h4>
-			<p>Your box sets strict email sending policies for your domain names to make it harder for spam and other fraudulent mail to claim to be you. Only this machine is authorized to send email on behalf of your domain names. If you use any other service to send email as you, it will likely get spam filtered by recipients.</p>
+			<h4>Отправляйте почту от имени домена только с этого сервера</h4>
+			<p>Сервер задаёт строгие политики отправки почты для ваших доменов, чтобы затруднить подделку отправителя. Только этот сервер авторизован для отправки почты от имени ваших доменов. Если вы используете другой сервис для отправки почты от вашего имени, у получателя такое письмо, скорее всего, попадёт в спам или будет отклонено.</p>
 		</div>
 		</div>
 		</div>

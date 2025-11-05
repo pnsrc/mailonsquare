@@ -31,67 +31,66 @@
     }
 </style>
 
-<h2>Two-Factor Authentication</h2>
 
-<p>When two-factor authentication is enabled, you will be prompted to enter a six digit code from an
-authenticator app (usually on your phone) when you log into this control panel.</p>
+<h2>Двухфакторная аутентификация</h2>
+
+<p>Когда включена двухфакторная аутентификация, при входе в панель управления вам будет предложено ввести шестизначный код
+из приложения-аутентификатора (обычно на телефоне).</p>
 
 <div class="panel panel-danger">
 <div class="panel-heading">
-Enabling two-factor authentication does not protect access to your email
+Включение двухфакторной аутентификации не защищает доступ к вашей почте
 </div>
 <div class="panel-body">
-Enabling two-factor authentication on this page only limits access to this control panel. Remember that most websites allow you to
-reset your password by checking your email, so anyone with access to your email can typically take over
-your other accounts. Additionally, if your email address or any alias that forwards to your email
-address is a typical domain control validation address (e.g admin@, administrator@, postmaster@, hostmaster@,
-webmaster@, abuse@), extra care should be taken to protect the account. <strong>Always use a strong password,
-and ensure every administrator account for this control panel does the same.</strong>
+Включение двухфакторной аутентификации на этой странице ограничивает доступ только к панели управления. Помните, что большинство сайтов
+позволяют сбросить пароль через электронную почту — поэтому любой, у кого есть доступ к вашей почте, обычно сможет получить контроль
+над другими вашими аккаунтами. Кроме того, если ваш адрес электронной почты или любой алиас, пересылающий почту на ваш адрес,
+является типичным адресом для подтверждения владения доменом (например admin@, administrator@, postmaster@, hostmaster@,
+webmaster@, abuse@), необходимо проявлять повышенную осторожность при защите такой учётной записи. <strong>Всегда используйте
+надёжный пароль и убедитесь, что каждая учётная запись администратора панели делает то же самое.</strong>
 </div>
 </div>
 
 <div class="twofactor">
-    <div class="loading-indicator">Loading...</div>
+    <div class="loading-indicator">Загрузка...</div>
 
     <form id="totp-setup">
-        <h3>Setup Instructions</h3>
+    <h3>Инструкции по настройке</h3>
 
         <div class="form-group">
-            <p>1. Install <a href="https://freeotp.github.io/">FreeOTP</a> or <a href="https://www.pcworld.com/article/3225913/what-is-two-factor-authentication-and-which-2fa-apps-are-best.html">any
-            other two-factor authentication app</a> that supports TOTP.</p>
+            <p>1. Установите <a href="https://freeotp.github.io/">FreeOTP</a> или <a href="https://www.pcworld.com/article/3225913/what-is-two-factor-authentication-and-which-2fa-apps-are-best.html">любое другое приложение двухфакторной аутентификации</a>, поддерживающее TOTP.</p>
         </div>
 
         <div class="form-group">
-            <p style="margin-bottom: 0">2. Scan the QR code in the app or directly enter the secret into the app:</p>
+            <p style="margin-bottom: 0">2. Сканируйте QR‑код в приложении или введите секрет вручную:</p>
             <div id="totp-setup-qr"></div>
         </div>
 
         <div class="form-group">
-            <label for="otp-label" style="font-weight: normal">3. Optionally, give your device a label so that you can remember what device you set it up on:</label>
-            <input type="text" id="totp-setup-label" class="form-control" placeholder="my phone" />
+            <label for="otp-label" style="font-weight: normal">3. По желанию укажите метку для устройства, чтобы помнить, на каком устройстве вы настроили аутентификатор:</label>
+            <input type="text" id="totp-setup-label" class="form-control" placeholder="мой телефон" />
         </div>
 
         <div class="form-group">
-            <label for="otp" style="font-weight: normal">4. Use the app to generate your first six-digit code and enter it here:</label>
-            <input type="text" id="totp-setup-token" class="form-control" placeholder="6-digit code" />
+            <label for="otp" style="font-weight: normal">4. С помощью приложения сгенерируйте первый шестизначный код и введите его здесь:</label>
+            <input type="text" id="totp-setup-token" class="form-control" placeholder="6-значный код" />
         </div>
 
         <input type="hidden" id="totp-setup-secret" />
 
         <div class="form-group">
-            <p>When you click Enable Two-Factor Authentication, you will be logged out of the control panel and will have to log in
-            again, now using your two-factor authentication app.</p>
-            <button id="totp-setup-submit" disabled type="submit" class="btn">Enable Two-Factor Authentication</button>
+            <p>После нажатия «Включить двухфакторную аутентификацию» вы будете выведены из панели управления и вам потребуется войти снова, используя приложение двухфакторной аутентификации.</p>
+            <button id="totp-setup-submit" disabled type="submit" class="btn">Включить двухфакторную аутентификацию</button>
         </div>
     </form>
 
     <form id="disable-2fa">
         <div class="form-group">
-            <p>Two-factor authentication is active for your account<span id="mfa-device-label"></span>.</p>
-            <p>You will have to log into the admin panel again after disabling two-factor authentication.</p>
+            <p>Двухфакторная аутентификация активирована для вашей учётной записи<span id="mfa-device-label"></span>.</p>
+            <p>После отключения двухфакторной аутентификации вам потребуется вновь войти в панель администратора.</p>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-danger">Disable Two-Factor Authentication</button>
+            <button type="submit" class="btn btn-danger">Отключить двухфакторную аутентификацию</button>
         </div>
     </form>
 
@@ -133,8 +132,8 @@ and ensure every administrator account for this control panel does the same.</st
         var img = document.createElement('img');
         img.src = "data:image/png;base64," + provisioned_totp.qr_code_base64;
 
-        var code = document.createElement('div');
-        code.innerHTML = `Secret: ${provisioned_totp.secret}`;
+    var code = document.createElement('div');
+    code.innerHTML = `Секрет: ${provisioned_totp.secret}`;
 
         el.totpQr.appendChild(img);
         el.totpQr.appendChild(code);
@@ -150,8 +149,8 @@ and ensure every administrator account for this control panel does the same.</st
     function render_disable(mfa) {
         el.disableForm.addEventListener('submit', do_disable);
         el.wrapper.classList.add('enabled');
-        if (mfa.label)
-          $("#mfa-device-label").text(" on device '" + mfa.label + "'");
+                if (mfa.label)
+                    $("#mfa-device-label").text(" на устройстве '" + mfa.label + "'");
     }
 
     function hide_error() {
