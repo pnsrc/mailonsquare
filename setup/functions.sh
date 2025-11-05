@@ -5,7 +5,18 @@
 # -o pipefail: don't ignore errors in the non-last command in a pipeline
 set -euo pipefail
 
+## Determine a sensible PHP version per-distribution. Default fallback is 8.0.
 PHP_VER=8.0
+if [ -f /etc/os-release ]; then
+	# shellcheck disable=SC1091
+	. /etc/os-release
+	# Debian 12 ships PHP 8.2; Ubuntu 22.04 ships PHP 8.1.
+	if [ "${ID:-}" = "debian" ] && [ "${VERSION_ID:-}" = "12" ]; then
+		PHP_VER=8.2
+	elif [ "${ID:-}" = "ubuntu" ] && [ "${VERSION_ID:-}" = "22.04" ]; then
+		PHP_VER=8.1
+	fi
+fi
 
 function hide_output {
 	# This function hides the output of a command unless the command fails

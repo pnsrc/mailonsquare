@@ -14,15 +14,26 @@ source setup/preflight.sh
 # Python may not be able to read/write files. This is also
 # in the management daemon startup script and the cron script.
 
-if ! locale -a | grep en_US.utf8 > /dev/null; then
-    # Generate locale if not exists
-    hide_output locale-gen en_US.UTF-8
+if ! locale -a | grep -i en_US.utf8 > /dev/null; then
+	# Generate locale if not exists. Different distros provide different tools.
+	if command -v locale-gen >/dev/null 2>&1; then
+		# Debian/Ubuntu typical helper
+		hide_output locale-gen en_US.UTF-8
+	elif command -v localedef >/dev/null 2>&1; then
+		# Fallback to localedef if locale-gen not present
+		hide_output localedef -i en_US -f UTF-8 en_US.UTF-8 || true
+	fi
 fi
 
+# Ensure shell environment variables for UTF-8 are set. Also run update-locale
+# when available so the change persists for login shells on Debian systems.
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_TYPE=en_US.UTF-8
+if command -v update-locale >/dev/null 2>&1; then
+	update-locale LANG=en_US.UTF-8 || true
+fi
 
 # Fix so line drawing characters are shown correctly in Putty on Windows. See #744.
 export NCURSES_NO_UTF8_ACS=1
@@ -76,7 +87,13 @@ fi
 # installation to that directory and write the file to contain the current
 # migration number for this version of Mail-in-a-Box.
 if ! id -u "$STORAGE_USER" >/dev/null 2>&1; then
-	useradd -m "$STORAGE_USER"
+	# Prefer the friendlier Debian `adduser` if available; fall back to useradd.
+	if command -v adduser >/dev/null 2>&1; then
+		# --disabled-password to avoid prompting, --gecos empty to skip interactive info
+		adduser --disabled-password --gecos "" "$STORAGE_USER"
+	else
+		useradd -m "$STORAGE_USER"
+	fi
 fi
 if [ ! -d "$STORAGE_ROOT" ]; then
 	mkdir -p "$STORAGE_ROOT"

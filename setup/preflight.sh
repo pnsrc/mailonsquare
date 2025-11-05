@@ -12,8 +12,13 @@ fi
 # Pull in the variables defined in /etc/os-release but in a
 # namespace to avoid polluting our variables.
 source <(cat /etc/os-release | sed s/^/OS_RELEASE_/)
-if [ "${OS_RELEASE_ID:-}" != "ubuntu" ] || [ "${OS_RELEASE_VERSION_ID:-}" != "22.04" ]; then
-	echo "Mail-in-a-Box only supports being installed on Ubuntu 22.04, sorry. You are running:"
+# Allow installation on Ubuntu 22.04 or Debian 12. Refuse other distros by default.
+if [ "${OS_RELEASE_ID:-}" = "ubuntu" ] && [ "${OS_RELEASE_VERSION_ID:-}" = "22.04" ]; then
+	: # supported Ubuntu
+elif [ "${OS_RELEASE_ID:-}" = "debian" ] && [ "${OS_RELEASE_VERSION_ID:-}" = "12" ]; then
+	: # supported Debian
+else
+	echo "Mail-in-a-Box only supports being installed on Ubuntu 22.04 or Debian 12, sorry. You are running:"
 	echo
 	echo "${OS_RELEASE_ID:-"Unknown linux distribution"} ${OS_RELEASE_VERSION_ID:-}"
 	echo

@@ -2,6 +2,12 @@
 source /etc/mailinabox.conf
 source setup/functions.sh # load our functions
 
+# Detect OS so we can avoid Ubuntu-specific actions on Debian
+if [ -f /etc/os-release ]; then
+	# Prefix variables similar to preflight for consistency
+	source <(cat /etc/os-release | sed s/^/OS_RELEASE_/)
+fi
+
 # Basic System Configuration
 # -------------------------
 
@@ -95,24 +101,30 @@ fi
 # ### Add PPAs.
 
 # We install some non-standard Ubuntu packages maintained by other
-# third-party providers. First ensure add-apt-repository is installed.
+# third-party providers. These PPA operations are Ubuntu-specific and
+# will be skipped on other distributions such as Debian.
+if [ "${OS_RELEASE_ID:-}" = "ubuntu" ]; then
+	# First ensure add-apt-repository is installed.
+	if [ ! -f /usr/bin/add-apt-repository ]; then
+		echo "Installing add-apt-repository..."
+		hide_output apt-get update
+		apt_install software-properties-common
+	fi
 
-if [ ! -f /usr/bin/add-apt-repository ]; then
-	echo "Installing add-apt-repository..."
-	hide_output apt-get update
-	apt_install software-properties-common
+	# Ensure the universe repository is enabled since some of our packages
+	# come from there and minimal Ubuntu installs may have it turned off.
+	hide_output add-apt-repository -y universe
+
+	# Install the duplicity PPA.
+	hide_output add-apt-repository -y ppa:duplicity-team/duplicity-release-git
+
+	# Stock PHP differs across distros; on Ubuntu we request ondrej/php to
+	# get specific PHP versions used by Mail-in-a-Box.
+	hide_output add-apt-repository --y ppa:ondrej/php
+else
+	echo "Non-Ubuntu OS (${OS_RELEASE_ID:-}) detected: skipping PPA configuration."
+	echo "Ensure required packages are available from the distribution repositories."
 fi
-
-# Ensure the universe repository is enabled since some of our packages
-# come from there and minimal Ubuntu installs may have it turned off.
-hide_output add-apt-repository -y universe
-
-# Install the duplicity PPA.
-hide_output add-apt-repository -y ppa:duplicity-team/duplicity-release-git
-
-# Stock PHP is now 8.1, but we're transitioning through 8.0 because
-# of Nextcloud.
-hide_output add-apt-repository --y ppa:ondrej/php
 
 # ### Update Packages
 
